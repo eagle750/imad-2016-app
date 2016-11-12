@@ -3,7 +3,6 @@ function loadLoginForm () {
         <h3>Login/Register</h3>
         <h6>Username</h6>
         <input type="text" id="username" placeholder="username" />
-        <br>
         <h6>Password</h6>
         <input type="password" id="password" />
         <br/><br/>
