@@ -48,7 +48,7 @@ ul {
     list-style-type: none;
     padding: 0;
     font-size:30px;
-   /* background-color:blue;*/
+   
     color:yellow;
     text-align:center;
     margin-top:-40px;
@@ -66,7 +66,9 @@ li {
     border:1px solid black;
     margin:-300px -100px 90px 500px;
     padding:0 -40px 0 0;
-    margin-left:0px
+    margin-left:0px;
+    background-color:blue;
+    
 }
 .image1{
    margin-top:0px; 
