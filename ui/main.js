@@ -1,10 +1,10 @@
 function loadLoginForm () {
     var loginHtml = `
         <h3>Login/Register</h3>
-        <h6>Username</h6>
+        <h5>Username</h5>
         <input type="text" id="username" placeholder="username" />
         <br/>
-        <h6>Password</h6>
+        <h5>Password</h5>
         <input type="password" id="password" />
        <br/><br/>
         <input type="submit" id="login_btn" value="Login" />
