@@ -69,11 +69,11 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: #FFF;
+    background-color: #111;
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: #FFFF99;
 }
 .image{
     margin-top:-20px;
