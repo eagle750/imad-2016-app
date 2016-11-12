@@ -63,6 +63,7 @@ li {
 #login_area{
     border:1px solid black;
     margin:50px 100px 50px 70px;
+    padding:0 10px;
     margin-left:-100px
 }
 image1{
