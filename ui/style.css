@@ -44,18 +44,27 @@ body {
     padding-bottom: 10px;
     border-bottom: 1px solid #ccc;
 }
+
 ul {
     list-style-type: none;
+    margin: 0;
     padding: 0;
-    font-size:30px;
-   
-    color:yellow;
-    text-align:center;
-    margin-top:-40px;
-    position:fixed;
-    margin-bottom:20px;
+     font-size:30px;
+      margin-top:-40px;
+    overflow: hidden;
+     position:fixed;
+    background-color: #dddddd;
+     margin-bottom:20px;
 }
 
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    padding: 8px;
+}
 li {
     display: inline;
 }
