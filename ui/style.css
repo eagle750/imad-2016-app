@@ -64,8 +64,9 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 18px;
+  /*  padding: 14px 18px;*/
     text-decoration: none;
+    width:1000px;
 }
 
 li a:hover:not(.active) {
