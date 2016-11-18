@@ -21,6 +21,7 @@ app.use(session({
     secret: 'someRandomSecretValue',
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 30}
 }));
+var pool = new Pool(config);
 
 function createTemplate (data) {
     var title = data.title;
@@ -28,49 +29,48 @@ function createTemplate (data) {
     var heading = data.heading;
     var content = data.content;
     
-    var htmlTemplate = `
-    <html>
-      <head>
+    var htmlTemplate = `<!DOCTYPE html>
+                         <head>
           <title>
-              ${title}
-          </title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link href="/ui/style.css" rel="stylesheet" />
-      </head> 
-      <body>
-          <div class="container">
-              <div>
-                  <a href="/">Home</a>
-              </div>
-              <hr/>
-              <h3>
-                  ${heading}
-              </h3>
-              <div>
-                  ${date.toDateString()}
-              </div>
-              <div>
-                ${content}
-              </div>
-              <hr/>
-              <h4>Comments</h4>
-              <div id="comment_form">
-              </div>
-              <div id="comments">
-                <center>Loading comments...</center>
-              </div>
-          </div>
-          <script type="text/javascript" src="/ui/article.js"></script>
-      </body>
-    </html>
-    `;
+        ${title} </title>
+    <link rel="stylesheet" type="text/css" href="/ui/blogstyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <span id="home"><a class="anchor" href="/">Home</a></span>
+        <span id="myblog">Vikshipt's Blog</span>
+       <span  style="margin-left:45%; font-size:20px; font-family: 'Architects Daughter', cursive;" id="userinfo">
+            <strong> Hi Guest !</strong>
+        </span>
+    </div>
+    <div id="articlelist">
+    </div>
+    <div id="dycontent">
+    <div id="maintext">
+        ${content}
+   
+        </div>
+        <div id="comment_form">
+          
+    </div>
+    <div id="comments">
+    <br> <span style="font-size:26px"><strong>Comments</strong></span><br>
+      Loading Comments....
+    </div>
+    </div>
+    
+<script type="text/javascript" src="/ui/article.js"></script>
+</body>
+</html> `;
     return htmlTemplate;
 }
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-
 
 function hash (input, salt) {
     // How do we create a hash?
@@ -151,10 +151,10 @@ app.get('/check-login', function (req, res) {
 
 app.get('/logout', function (req, res) {
    delete req.session.auth;
-   res.send('<html><body>Logged out!<br/><br/><a href="/">Back to home</a></body></html>');
+   res.send('<http><head><meta http-equiv="Refresh" content="1; /"><h1>Logged Out</h1></head>');
 });
 
-var pool = new Pool(config);
+
 
 app.get('/get-articles', function (req, res) {
    // make a select request
@@ -226,6 +226,7 @@ app.get('/articles/:articleName', function (req, res) {
     }
   });
 });
+
 
 app.get('/ui/:fileName', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', req.params.fileName));
