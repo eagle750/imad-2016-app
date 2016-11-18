@@ -1,17 +1,16 @@
-function changediv(user_name)
-{
-    var changedivtemp=`<h1> Hi `+user_name+` </h1><br><h1><a href="/logout"> Logout</a></h1>`;
-    document.getElementById('loginwindow').innerHTML=changedivtemp;
-    
-}
-
-
 function loadLoginForm () {
-   
-    
+    var loginHtml = `
+        <h3>Login/Register to unlock awesome features</h3>
+        <input type="text" id="username" placeholder="username" />
+        <input type="password" id="password" />
+        <br/><br/>
+        <input type="submit" id="login_btn" value="Login" />
+        <input type="submit" id="register_btn" value="Register" />
+        `;
+    document.getElementById('login_area').innerHTML = loginHtml;
     
     // Submit username/password to login
-    var submit = document.getElementById('loginbtn');
+    var submit = document.getElementById('login_btn');
     submit.onclick = function () {
         // Create a request object
         var request = new XMLHttpRequest();
@@ -39,7 +38,8 @@ function loadLoginForm () {
         // Make the request
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        
+        console.log(username);
+        console.log(password);
         request.open('POST', '/login', true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(JSON.stringify({username: username, password: password}));  
@@ -47,7 +47,7 @@ function loadLoginForm () {
         
     };
     
-    var register = document.getElementById('registerbtn');
+    var register = document.getElementById('register_btn');
     register.onclick = function () {
         // Create a request object
         var request = new XMLHttpRequest();
@@ -78,11 +78,15 @@ function loadLoginForm () {
     
     };
 }
+
 function loadLoggedInUser (username) {
-    var user_name=username;
-    
-    alert(`Welcome ! `+user_name+` is now logged in`);
+    var loginArea = document.getElementById('login_area');
+    loginArea.innerHTML = `
+        <h3> Hi <i>${username}</i></h3>
+        <a href="/logout">Logout</a>
+    `;
 }
+
 function loadLogin () {
     // Check if the user is already logged in
     var request = new XMLHttpRequest();
@@ -90,7 +94,8 @@ function loadLogin () {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 loadLoggedInUser(this.responseText);
-                changediv(this.responseText);
+            } else {
+                loadLoginForm();
             }
         }
     };
@@ -99,5 +104,35 @@ function loadLogin () {
     request.send(null);
 }
 
+function loadArticles () {
+        // Check if the user is already logged in
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            var articles = document.getElementById('articles');
+            if (request.status === 200) {
+                var content = '<ul>';
+                var articleData = JSON.parse(this.responseText);
+                for (var i=0; i< articleData.length; i++) {
+                    content += `<li>
+                    <a href="/articles/${articleData[i].title}">${articleData[i].heading}</a>
+                    (${articleData[i].date.split('T')[0]})</li>`;
+                }
+                content += "</ul>"
+                articles.innerHTML = content;
+            } else {
+                articles.innerHTML('Oops! Could not load all articles!')
+            }
+        }
+    };
+    
+    request.open('GET', '/get-articles', true);
+    request.send(null);
+}
+
+
+// The first thing to do is to check if the user is logged in!
 loadLogin();
-loadLoginForm();
+
+// Now this is something that we could have directly done on the server-side using templating too!
+loadArticles();
