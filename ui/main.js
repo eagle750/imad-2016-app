@@ -1,8 +1,7 @@
 function loadLoginForm () {
     var loginHtml = `
-        <h3>Login/Login/Register</h3>
+        <h3 id="two">Login/Register </h3>
         <input type="text" id="username" placeholder="username" />
-        <br/>
         <input type="password" id="password" />
         <br/><br/>
         <input type="submit" id="login_btn" value="Login" />
@@ -119,10 +118,10 @@ function loadArticles () {
                     <a href="/articles/${articleData[i].title}">${articleData[i].heading}</a>
                     (${articleData[i].date.split('T')[0]})</li>`;
                 }
-                content += "</ul>"
+                content += "</ul>";
                 articles.innerHTML = content;
             } else {
-                articles.innerHTML('Oops! Could not load all articles!')
+                articles.innerHTML('Oops! Could not load all articles!');
             }
         }
     };
