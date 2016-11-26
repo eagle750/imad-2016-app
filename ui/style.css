@@ -70,7 +70,8 @@ li a {
     width:300px;
     font-family: cursive;
 }
-
+.active {
+    background-color: #4CAF50;}
 li a:hover:not(.active) {
     background-color: #111;
 }
