@@ -100,10 +100,11 @@ width:400px;
 }
 .name
 {
-    background-color: #FFFF99;
+   
+    margin-top: -300px;
+    margin-left: 100px;
+     background-color: #FFFF99;
      width: 700px;
     height: 300px;
-    margin-top: -200px;
-    margin-left: 70px;
 }
 
