@@ -71,9 +71,9 @@ li a {
     font-family: cursive;
 }
 
-/*li a:hover:not(.active) {
+li a:hover:not(.active) {
     background-color: #111;
-}*/
+}
 
 
 
